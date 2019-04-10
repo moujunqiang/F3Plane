@@ -6,37 +6,34 @@ import android.graphics.Paint;
 
 public class Bullet {
     private Bitmap bitmap;
-    private int x, y;
-    private int speed = 20;
+    private int x,y;
+    private int speed=20;
     private boolean isOut;
     private int type;
-
-    public Bullet(Bitmap bitmap, int x, int y, int type) {
+    public Bullet(Bitmap bitmap,int x,int y,int type) {
         this.bitmap = bitmap;
         this.x = x;
         this.y = y;
         this.type = type;
     }
-
-    public void draw(Canvas canvas, Paint paint) {
-        canvas.drawBitmap ( bitmap, x, y, paint );
-        lg ();
+    public void draw(Canvas canvas, Paint paint){
+        canvas.drawBitmap(bitmap,x,y,paint);
+        lg();
     }
+    private void lg(){
 
-    private void lg() {
-
-        switch (type) {
+        switch (type){
             //玩家子弹
             case 0:
-                y -= speed;
-                if (y < 0) {
+                y-=speed;
+                if(y<0){
                     isOut = true;
                 }
                 break;
             case 1:
                 //Boss子弹
-                y += speed;
-                if (y < 0) {
+                y+=speed;
+                if (y<0){
                     isOut = true;
                 }
 
@@ -45,6 +42,8 @@ public class Bullet {
                 break;
 
         }
+
+
 
     }
 

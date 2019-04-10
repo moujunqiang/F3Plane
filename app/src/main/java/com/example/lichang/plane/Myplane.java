@@ -3,6 +3,7 @@ package com.example.lichang.plane;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.MotionEvent;
 
 public class Myplane {
@@ -13,13 +14,13 @@ public class Myplane {
     private boolean noCollision;
     private int noCollisionCount;
 
-    private int hp = 3;
+    private int bossHp = 3;
 
     public Myplane(Bitmap bitmap, Bitmap bitmapHp){
         this.bitmap = bitmap;
         this.bitmapHp = bitmapHp;
-        x = MySurfaceView.width/2-bitmap.getWidth()/2;
-        y = MySurfaceView.height-bitmap.getHeight();
+        x = MySurfaceView.Width/2-bitmap.getWidth()/2;
+        y = MySurfaceView.Height-bitmap.getHeight();
         width = bitmap.getWidth();
         height = bitmap.getHeight();
     }
@@ -38,8 +39,8 @@ public class Myplane {
             canvas.drawBitmap(bitmap,x,y,paint);
         }
 
-        for (int i = 0; i<hp; i++){
-            canvas.drawBitmap(bitmapHp,i*bitmapHp.getWidth(),MySurfaceView.height-bitmapHp.getHeight(),paint);
+        for (int i = 0; i<bossHp; i++){
+            canvas.drawBitmap(bitmapHp,i*bitmapHp.getWidth(),MySurfaceView.Height-bitmapHp.getHeight(),paint);
         }
 
     }
@@ -53,24 +54,63 @@ public class Myplane {
                 if(y<0){
                     y=0;
                 }
-                if(y+height>MySurfaceView.height){
-                    y=MySurfaceView.height-height;
+                if(y+height>MySurfaceView.Height){
+                    y=MySurfaceView.Height-height;
                 }
             }
         }
     }
 
-    public boolean isCollision(Bullet bullet){
-        if (noCollision){
+    public boolean isCollision(Bullet bullet) {
+        if (noCollision) {
             return false;
-        }else{
-            if (bullet.getX()>x&&bullet.getX()<x+width&&bullet.getY()<y+height){
+
+
+        } else {
+            if (bullet.getX() > x && bullet.getX() < x + width && bullet.getY() > y && bullet.getY() < y + height) {
+                Log.e("AAA", "isCollision: .................................");
                 noCollision = true;
-                hp--;
+                if (bossHp > 0) {
+                    bossHp--;
+                }
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean isCollision(BossPlane bossPlane) {
+        if (noCollision) {
+            return false;
+        } else {
+
+            if (bossPlane.getY() + bossPlane.getH() > y && bossPlane.getY() + bossPlane.getH() < y + height) {
+                if (x < bossPlane.getX() && x + width > bossPlane.getX()) {
+                    noCollision = true;
+                    if (bossHp >= 0) {
+                        bossHp--;
+                    }
+                    return true;
+                }
+                if (x>bossPlane.getX()&&x+width<bossPlane.getX()+bossPlane.getX()){
+                    noCollision = true;
+                    if (bossHp > 0) {
+                        bossHp--;
+                    }
+                    return true;
+                }
+                if(x<bossPlane.getX()&&x+width>bossPlane.getX()+bossPlane.getW()){
+                    noCollision = true;
+                    if (bossHp > 0) {
+                        bossHp--;
+                    }
+                    return true;
+                }
+
+
+            }
+            return false;
+        }
     }
 
     public int getX() {
