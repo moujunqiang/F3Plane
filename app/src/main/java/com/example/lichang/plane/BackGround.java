@@ -29,10 +29,10 @@ public class BackGround {
         y1 += 5;
         y2 += 5;
 
-        if (y1 >= MySurfaceView.height) {
+        if (y1 >= MySurfaceView.Height) {
             y1 = y2 - bitmap.getHeight();
         }
-        if (y2 >= MySurfaceView.height) {
+        if (y2 >= MySurfaceView.Height) {
             y2 = y1 - bitmap.getHeight();
         }
     }
