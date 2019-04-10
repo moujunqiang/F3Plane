@@ -8,6 +8,7 @@ import android.view.SurfaceView;
 import java.util.Vector;
 
 public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
+    public static int height;
     private SurfaceHolder surfaceHolder;
     private Canvas canvas;//绘制图形的画布
     private boolean isDrawing = true;

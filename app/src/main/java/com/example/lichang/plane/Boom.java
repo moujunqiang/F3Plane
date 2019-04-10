@@ -7,35 +7,35 @@ import android.graphics.Paint;
 public class Boom {
     private Bitmap bitmap;
     private int x,y;
-    private int currentFrame;//当前显示的第几副画面
     private int totalFrame;
-    private int frameW,frameH;
-    private boolean isOut;
+    private int currentFrame;//当前显示的第几幅画面
+    private  int frameW,frameH;
+    private  boolean isEnd;
 
-    public Boom(Bitmap bitmap, int x, int y, int totalFrame) {
+    public Boom(Bitmap bitmap , int  x ,int y,int totalFrame){
         this.bitmap = bitmap;
         this.x = x;
         this.y = y;
         this.totalFrame = totalFrame;
-        frameH = bitmap.getHeight();
         frameW = bitmap.getWidth()/totalFrame;
+        frameH = bitmap.getHeight();
     }
-    public void draw(Canvas canvas, Paint paint){
+    public void  draw(Canvas canvas , Paint paint){
         canvas.save();
         canvas.clipRect(x,y,x+frameW,y+frameH);
         canvas.drawBitmap(bitmap,x-currentFrame*frameW,y,paint);
         canvas.restore();
-        lg();
+        logic();
     }
-    public void lg(){
-        if(currentFrame<totalFrame){
+    public  void  logic(){
+        if (currentFrame<totalFrame){
             currentFrame++;
-        }else {
-            isOut = true;
+        }else{
+            isEnd = true;
         }
     }
 
-    public boolean isOut() {
-        return isOut;
+    public boolean isEnd() {
+        return isEnd;
     }
 }

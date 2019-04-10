@@ -44,17 +44,17 @@ public class Myplane {
         }
 
     }
-    public void touchEvent(MotionEvent event){
-        if (event.getAction()==MotionEvent.ACTION_MOVE){
-            float ex = (int) event.getX();
-            float ey = (int) event.getY();
+    public void onTouch(MotionEvent event){
+        if (event.getAction() == MotionEvent.ACTION_MOVE){
+            float ex = event.getX();
+            float ey = event.getY();
             if (ex>x&&ex<x+width&&ey>y&&ey<y+height){
                 x = (int) ex-width/2;
                 y = (int) ey-height/2;
                 if(y<0){
                     y=0;
                 }
-                if(y+height>MySurfaceView.Height){
+                if (y+height>MySurfaceView.Height) {
                     y=MySurfaceView.Height-height;
                 }
             }
@@ -64,8 +64,6 @@ public class Myplane {
     public boolean isCollision(Bullet bullet) {
         if (noCollision) {
             return false;
-
-
         } else {
             if (bullet.getX() > x && bullet.getX() < x + width && bullet.getY() > y && bullet.getY() < y + height) {
                 Log.e("AAA", "isCollision: .................................");
@@ -77,40 +75,6 @@ public class Myplane {
             }
         }
         return false;
-    }
-
-    public boolean isCollision(BossPlane bossPlane) {
-        if (noCollision) {
-            return false;
-        } else {
-
-            if (bossPlane.getY() + bossPlane.getH() > y && bossPlane.getY() + bossPlane.getH() < y + height) {
-                if (x < bossPlane.getX() && x + width > bossPlane.getX()) {
-                    noCollision = true;
-                    if (bossHp >= 0) {
-                        bossHp--;
-                    }
-                    return true;
-                }
-                if (x>bossPlane.getX()&&x+width<bossPlane.getX()+bossPlane.getX()){
-                    noCollision = true;
-                    if (bossHp > 0) {
-                        bossHp--;
-                    }
-                    return true;
-                }
-                if(x<bossPlane.getX()&&x+width>bossPlane.getX()+bossPlane.getW()){
-                    noCollision = true;
-                    if (bossHp > 0) {
-                        bossHp--;
-                    }
-                    return true;
-                }
-
-
-            }
-            return false;
-        }
     }
 
     public int getX() {

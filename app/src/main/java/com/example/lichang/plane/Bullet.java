@@ -6,53 +6,47 @@ import android.graphics.Paint;
 
 public class Bullet {
     private Bitmap bitmap;
-    private int x,y;
-    private int speed=20;
-    private boolean isOut;
+    private int x, y;
+    private int speed = 10;
+    private boolean isDead;
     private int type;
-    public Bullet(Bitmap bitmap,int x,int y,int type) {
+
+    public Bullet(Bitmap bitmap, int x, int y, int type) {
         this.bitmap = bitmap;
         this.x = x;
         this.y = y;
         this.type = type;
     }
-    public void draw(Canvas canvas, Paint paint){
-        canvas.drawBitmap(bitmap,x,y,paint);
-        lg();
-    }
-    private void lg(){
 
-        switch (type){
-            //玩家子弹
+    public void draw(Canvas canvas, Paint paint) {
+        canvas.drawBitmap(bitmap, x, y, paint);
+        logic();
+
+    }
+
+    public void logic() {
+        switch (type) {
             case 0:
-                y-=speed;
-                if(y<0){
-                    isOut = true;
+                //玩家子弹
+                y -= speed;
+                if (y < 0) {
+                    isDead = true;
                 }
                 break;
+
             case 1:
                 //Boss子弹
-                y+=speed;
-                if (y<0){
-                    isOut = true;
+                y += speed + 2;
+                if (y < 0) {
+                    isDead = true;
                 }
-
                 break;
             default:
                 break;
-
         }
-
-
-
     }
-
-    public boolean isOut() {
-        return isOut;
-    }
-
-    public Bitmap getBitmap() {
-        return bitmap;
+    public boolean isDead() {
+        return isDead;
     }
 
     public int getX() {
@@ -63,8 +57,17 @@ public class Bullet {
         return y;
     }
 
-    public void setOut(boolean out) {
-        isOut = out;
+    public int getType() {
+        return type;
     }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
+    }
+
 }
 
