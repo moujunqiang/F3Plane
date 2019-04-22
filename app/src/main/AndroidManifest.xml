@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity android:name=".Start"></activity>
-        <activity android:name=".Online"></activity>
         <activity android:name=".Rank"></activity>
         <activity android:name=".MainActivity" >
             <intent-filter>

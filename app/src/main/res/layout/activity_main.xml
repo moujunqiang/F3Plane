@@ -16,33 +16,20 @@
 
         <Button
             android:id="@+id/start"
+            android:background="@drawable/kaishi"
             android:layout_width="175dp"
             android:layout_height="75dp"
             android:text="开始"
             android:textColor="#4a5658"
             android:textSize="35dp" />
 
-        <Button
-            android:id="@+id/online"
-            android:layout_width="175dp"
-            android:layout_height="75dp"
-            android:text="联机模式"
-            android:textColor="#4a5658"
-            android:textSize="35dp" />
 
         <Button
             android:id="@+id/rank"
+            android:background="@drawable/paiming"
             android:layout_width="175dp"
             android:layout_height="75dp"
             android:text="排名"
-            android:textColor="#4a5658"
-            android:textSize="35dp" />
-
-        <Button
-            android:id="@+id/back"
-            android:layout_width="175dp"
-            android:layout_height="75dp"
-            android:text="退出"
             android:textColor="#4a5658"
             android:textSize="35dp" />
     </LinearLayout>
